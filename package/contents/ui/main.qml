@@ -1,20 +1,21 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.kcoreaddons 1.0 as KCoreAddons
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
+// import org.kde.kcoreaddons as KCoreAddons
 
 import "lib"
 
-Item {
+PlasmoidItem {
 	id: main
 
 	property string targetDesktopTheme: 'breeze-alphablack'
 
-	property bool validDesktopTheme: theme.themeName == targetDesktopTheme || theme.themeName == 'breeze-dark'
+	property bool validDesktopTheme: Kirigami.Theme.themeName == targetDesktopTheme || Kirigami.Theme.themeName == 'breeze-dark'
 	property bool widgetsUnlocked: plasmoid.immutability === PlasmaCore.Types.Mutable
 	Plasmoid.status: validDesktopTheme && widgetsUnlocked ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 
@@ -32,9 +33,9 @@ Item {
 		id: executable
 	}
 
-	KCoreAddons.KUser {
-		id: kuser
-	}
+	// KCoreAddons.KUser {
+	// 	id: kuser
+	// }
 
 	readonly property string breezeAlphaBlackDir: {
 		if (kuser.loginName) {
@@ -123,8 +124,8 @@ Item {
 			// console.log('main.panelOpacity', main.panelOpacity)
 
 			// If we've modified any values, the binding has been broken, so rebind to the properties.
-			if (main.Plasmoid.fullRepresentationItem) {
-				main.Plasmoid.fullRepresentationItem.updateConfigBindings()
+			if (main.fullRepresentationItem) {
+				main.fullRepresentationItem.updateConfigBindings()
 			}
 		})
 	}
@@ -134,19 +135,19 @@ Item {
 	//----
 	ThemeColor {
 		id: accentColorProperty
-		propPath: 'theme.accentColor'
+		propPath: 'Kirigami.Theme.accentColor'
 		mainPropKey: 'themeAccentColor'
 	}
 
 	ThemeColor {
 		id: highlightColorProperty
-		propPath: 'theme.highlightColor'
+		propPath: 'Kirigami.Theme.highlightColor'
 		mainPropKey: 'themeHighlightColor'
 	}
 
 	ThemeColor {
 		id: textColorProperty
-		propPath: 'theme.textColor'
+		propPath: 'Kirigami.Theme.textColor'
 		mainPropKey: 'themeTextColor'
 	}
 
@@ -206,14 +207,14 @@ Item {
 
 
 	//----
-	Plasmoid.fullRepresentation: Item {
+	fullRepresentation: Item {
 		id: popupView
 		property bool loaded: false
 		Component.onCompleted: loaded = true
 
-		Layout.minimumWidth: units.gridUnit * 1
-		Layout.minimumHeight: units.gridUnit * 1
-		Layout.preferredWidth: units.gridUnit * 16
+		Layout.minimumWidth: Kirigami.Units.gridUnit * 1
+		Layout.minimumHeight: Kirigami.Units.gridUnit * 1
+		Layout.preferredWidth: Kirigami.Units.gridUnit * 16
 		Layout.preferredHeight: scrollView.contentHeight
 		// Layout.maximumWidth: plasmoid.screenGeometry.width
 		// Layout.maximumHeight: plasmoid.screenGeometry.height
@@ -225,13 +226,13 @@ Item {
 		}
 
 
-		PlasmaExtras.ScrollArea {
+		Kirigami.ScrollablePage {
 			id: scrollView
 			anchors.fill: parent
-			readonly property int contentWidth: contentItem ? contentItem.width : width
-			readonly property int contentHeight: contentItem ? contentItem.height : 0 // Warning: Binding loop
-			readonly property int viewportWidth: viewport ? viewport.width : width
-			readonly property int viewportHeight: viewport ? viewport.height : height
+			// property int contentWidth: contentItem ? contentItem.width : width
+			// property int contentHeight: contentItem ? contentItem.height : 0 // Warning: Binding loop
+			// property int viewportWidth: viewport ? viewport.width : width
+			// property int viewportHeight: viewport ? viewport.height : height
 
 			ColumnLayout {
 				width: scrollView.viewportWidth
@@ -257,8 +258,8 @@ Item {
 					Layout.fillWidth: true
 					value: main.themeAccentColor
 					label: ""
-					showAlphaChannel: false
-					buttonOutlineColor: theme.textColor
+					// showAlphaChannel: false
+					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
 					function apply() {
@@ -280,8 +281,8 @@ Item {
 					Layout.fillWidth: true
 					value: main.themeTextColor
 					label: ""
-					showAlphaChannel: false
-					buttonOutlineColor: theme.textColor
+					// showAlphaChannel: false
+					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
 					function apply() {
@@ -303,8 +304,8 @@ Item {
 					Layout.fillWidth: true
 					value: main.themeHighlightColor
 					label: ""
-					showAlphaChannel: false
-					buttonOutlineColor: theme.textColor
+					// showAlphaChannel: false
+					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
 					function apply() {
@@ -334,17 +335,17 @@ Item {
 				}
 				
 				RowLayout {
-					PlasmaComponents.Button {
+					PlasmaComponents.ToolButton {
 						text: i18n("Apply Colors")
-						iconName: "dialog-ok-apply"
+						// iconName: "dialog-ok-apply"
 						onClicked: main.applyTitleBarColors()
-						implicitWidth: minimumWidth
+						// implicitWidth: minimumWidth
 					}
 					PlasmaComponents.Button {
 						text: i18n("Reset Colors")
-						iconName: "edit-undo-symbolic"
+						// iconName: "edit-undo-symbolic"
 						onClicked: main.resetTitleBarColors()
-						implicitWidth: minimumWidth
+						// implicitWidth: minimumWidth
 					}
 				}
 
@@ -424,7 +425,7 @@ Item {
 					Layout.fillWidth: true
 					PlasmaComponents.RadioButton {
 						id: frameInsideButton
-						exclusiveGroup: ExclusiveGroup { id: frameGroup }
+						// exclusiveGroup: ExclusiveGroup { id: frameGroup }
 						checked: main.taskStyle == 'inside'
 						onCheckedChanged: {
 							if (!(main.configLoaded && popupView.loaded)) return;
@@ -446,7 +447,7 @@ Item {
 					Layout.fillWidth: true
 					PlasmaComponents.RadioButton {
 						id: frameOutsideButton
-						exclusiveGroup: frameGroup
+						// exclusiveGroup: frameGroup
 						checked: main.taskStyle == 'outside'
 						onCheckedChanged: {
 							if (!(main.configLoaded && popupView.loaded)) return;
@@ -467,14 +468,14 @@ Item {
 				}
 
 				Item {
-					Layout.preferredHeight: units.largeSpacing
+					Layout.preferredHeight: Kirigami.Units.largeSpacing
 				}
 
 				RowLayout {
-					PlasmaCore.IconItem {
+					Kirigami.Icon {
 						source: "unlock"
-						Layout.preferredWidth: units.iconSizes.medium
-						Layout.preferredHeight: units.iconSizes.medium
+						Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+						Layout.preferredHeight: Kirigami.Units.iconSizes.medium
 						Layout.alignment: Qt.AlignTop
 					}
 
@@ -487,14 +488,14 @@ Item {
 				}
 
 				Item {
-					Layout.preferredHeight: units.largeSpacing
+					Layout.preferredHeight: Kirigami.Units.largeSpacing
 				}
 
 				PlasmaComponents.Button {
 					text: i18n("Reset To Defaults")
-					iconName: "edit-undo-symbolic"
+					// iconName: "edit-undo-symbolic"
 					onClicked: main.resetAllToDefaults()
-					implicitWidth: minimumWidth
+					// implicitWidth: minimumWidth
 					Layout.alignment: Qt.AlignHCenter
 				}
 

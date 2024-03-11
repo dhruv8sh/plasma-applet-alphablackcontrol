@@ -1,9 +1,10 @@
 // /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/ui/Task.qml
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.plasmoid
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 MouseArea {
 	id: task
@@ -15,7 +16,7 @@ MouseArea {
 	property alias icon: icon.source
 	property alias label: label.text
 
-	PlasmaCore.FrameSvgItem {
+	KSvg.FrameSvgItem {
 		id: frame
 		imagePath: "widgets/tasks"
 		prefix: task.containsMouse ? "hover" : "normal"
@@ -25,15 +26,13 @@ MouseArea {
 			id: iconBox
 			anchors.fill: parent
 
-			PlasmaCore.IconItem {
+			Kirigami.Icon {
 				id: icon
 				Layout.fillHeight: true
 				Layout.preferredWidth: height
 
 				active: task.containsMouse
 				enabled: true
-				usesPlasmaTheme: false
-
 				source: "xorg"
 			}
 			PlasmaComponents.Label {

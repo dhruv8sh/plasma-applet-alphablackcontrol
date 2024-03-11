@@ -1,0 +1,22 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zrenfire@gmail.com",
+                "Name": "Chris Holland"
+            }
+        ],
+        "Category": "",
+        "Description": "",
+        "EnabledByDefault": true,
+        "Icon": "color-picker-black",
+        "Id": "com.github.zren.alphablackcontrol",
+        "Name": "AlphaBlack Control",
+        "Version": "8",
+        "Website": "https://github.com/Zren/plasma-applet-alphablackcontrol"
+    },
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices",
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
