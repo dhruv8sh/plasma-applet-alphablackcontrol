@@ -1,13 +1,13 @@
 // Version 3
-
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Window 2.2
-
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import QtQuick.Window
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kquickcontrols as KQuickControls
+import org.kde.kirigami as Kirigami
 
 import ".."
 
@@ -15,12 +15,12 @@ RowLayout {
 	id: configColor
 	spacing: 2
 	// Layout.fillWidth: true
-	Layout.maximumWidth: 300 * units.devicePixelRatio
+	Layout.maximumWidth: 300
 
 	property alias label: label.text
 	property alias labelColor: label.color
 	property alias horizontalAlignment: label.horizontalAlignment
-	property alias showAlphaChannel: dialog.showAlphaChannel
+	// property alias showAlphaChannel: dialog2.showAlphaChannel
 	property color buttonOutlineColor: {
 		if (valueColor.r + valueColor.g + valueColor.b > 0.5) {
 			return "#BB000000" // Black outline
@@ -30,7 +30,7 @@ RowLayout {
 	}
 
 	property TextField textField: textField
-	property ColorDialog dialog: dialog
+	property KQuickControls.ColorButton dialog: dialog2
 
 	property string configKey: ''
 	property string defaultColor: ''
@@ -87,7 +87,7 @@ RowLayout {
 			anchors.fill: parent
 			color: configColor.valueColor
 			border.width: 2
-			border.color: parent.containsMouse ? theme.highlightColor : buttonOutlineColor
+			border.color: parent.containsMouse ? Kirigami.Theme.highlightColor : buttonOutlineColor
 		}
 	}
 
@@ -107,17 +107,17 @@ RowLayout {
 		}
 	}
 
-	ColorDialog {
-		id: dialog
+	KQuickControls.ColorButton {
+		id: dialog2
 		visible: false
-		modality: Qt.WindowModal
-		title: configColor.label
+		// modality: Qt.WindowModal
+		// title: configColor.label
 		showAlphaChannel: true
-		color: configColor.valueColor
-		onCurrentColorChanged: {
-			if (visible && color != currentColor) {
-				configColor.value = currentColor
-			}
-		}
+		// color: configColor.valueColor
+		// onCurrentColorChanged: {
+		// 	if (visible && color != currentColor) {
+		// 		configColor.value = currentColor
+		// 	}
+		// }
 	}
 }
