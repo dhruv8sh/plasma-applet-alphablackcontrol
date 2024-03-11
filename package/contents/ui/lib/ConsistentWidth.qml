@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Layouts 1.0 // Needed to access item.Layout.minimumWidth
+import QtQuick
+import QtQuick.Layouts
 
 QtObject {
 	id: consistentWidth
