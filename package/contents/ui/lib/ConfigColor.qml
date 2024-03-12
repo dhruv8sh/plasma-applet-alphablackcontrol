@@ -75,21 +75,21 @@ RowLayout {
 		horizontalAlignment: Text.AlignLeft
 	}
 
-	MouseArea {
-		id: mouseArea
-		Layout.preferredWidth: textField.height
-		Layout.preferredHeight: textField.height
-		hoverEnabled: true
-
-		onClicked: dialog.open()
-
-		Rectangle {
-			anchors.fill: parent
-			color: configColor.valueColor
-			border.width: 2
-			border.color: parent.containsMouse ? Kirigami.Theme.highlightColor : buttonOutlineColor
-		}
-	}
+	// MouseArea {
+	// 	id: mouseArea
+	// 	Layout.preferredWidth: textField.height
+	// 	Layout.preferredHeight: textField.height
+	// 	hoverEnabled: true
+ //
+	// 	onClicked: dialog.open()
+ //
+	// 	Rectangle {
+	// 		anchors.fill: parent
+	// 		color: configColor.valueColor
+	// 		border.width: 2
+	// 		border.color: parent.containsMouse ? Kirigami.Theme.highlightColor : buttonOutlineColor
+	// 	}
+	// }
 
 	TextField {
 		id: textField
@@ -109,15 +109,11 @@ RowLayout {
 
 	KQuickControls.ColorButton {
 		id: dialog2
-		visible: false
+		// visible: false
 		// modality: Qt.WindowModal
-		// title: configColor.label
+		text: configColor.label
 		showAlphaChannel: true
-		// color: configColor.valueColor
-		// onCurrentColorChanged: {
-		// 	if (visible && color != currentColor) {
-		// 		configColor.value = currentColor
-		// 	}
-		// }
+		color: configColor.valueColor
+		onColorChanged:configColor.value = color
 	}
 }

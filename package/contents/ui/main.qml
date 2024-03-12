@@ -37,13 +37,7 @@ PlasmoidItem {
 	// 	id: kuser
 	// }
 
-	readonly property string breezeAlphaBlackDir: {
-		if (kuser.loginName) {
-			return '/home/' + kuser.loginName + '/.local/share/plasma/desktoptheme/' + targetDesktopTheme
-		} else {
-			return ''
-		}
-	}
+	readonly property string breezeAlphaBlackDir: '~/.local/share/plasma/desktoptheme/' + targetDesktopTheme
 
 
 	//----
@@ -423,9 +417,10 @@ PlasmoidItem {
 
 				RowLayout {
 					Layout.fillWidth: true
+					ButtonGroup { id: frameGroup }
 					PlasmaComponents.RadioButton {
 						id: frameInsideButton
-						// exclusiveGroup: ExclusiveGroup { id: frameGroup }
+						ButtonGroup.group: frameGroup
 						checked: main.taskStyle == 'inside'
 						onCheckedChanged: {
 							if (!(main.configLoaded && popupView.loaded)) return;
@@ -447,7 +442,7 @@ PlasmoidItem {
 					Layout.fillWidth: true
 					PlasmaComponents.RadioButton {
 						id: frameOutsideButton
-						// exclusiveGroup: frameGroup
+						ButtonGroup.group: frameGroup
 						checked: main.taskStyle == 'outside'
 						onCheckedChanged: {
 							if (!(main.configLoaded && popupView.loaded)) return;
