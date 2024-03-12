@@ -20,7 +20,7 @@ RowLayout {
 	property alias label: label.text
 	property alias labelColor: label.color
 	property alias horizontalAlignment: label.horizontalAlignment
-	// property alias showAlphaChannel: dialog2.showAlphaChannel
+	property alias showAlphaChannel: dialog2.showAlphaChannel
 	property color buttonOutlineColor: {
 		if (valueColor.r + valueColor.g + valueColor.b > 0.5) {
 			return "#BB000000" // Black outline
@@ -74,22 +74,6 @@ RowLayout {
 		Layout.fillWidth: horizontalAlignment == Text.AlignRight
 		horizontalAlignment: Text.AlignLeft
 	}
-
-	// MouseArea {
-	// 	id: mouseArea
-	// 	Layout.preferredWidth: textField.height
-	// 	Layout.preferredHeight: textField.height
-	// 	hoverEnabled: true
- //
-	// 	onClicked: dialog.open()
- //
-	// 	Rectangle {
-	// 		anchors.fill: parent
-	// 		color: configColor.valueColor
-	// 		border.width: 2
-	// 		border.color: parent.containsMouse ? Kirigami.Theme.highlightColor : buttonOutlineColor
-	// 	}
-	// }
 
 	TextField {
 		id: textField

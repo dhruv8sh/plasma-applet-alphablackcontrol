@@ -33,10 +33,6 @@ PlasmoidItem {
 		id: executable
 	}
 
-	// KCoreAddons.KUser {
-	// 	id: kuser
-	// }
-
 	readonly property string breezeAlphaBlackDir: '~/.local/share/plasma/desktoptheme/' + targetDesktopTheme
 
 
@@ -129,19 +125,19 @@ PlasmoidItem {
 	//----
 	ThemeColor {
 		id: accentColorProperty
-		propPath: 'Kirigami.Theme.accentColor'
+		propPath: 'theme.accentColor'
 		mainPropKey: 'themeAccentColor'
 	}
 
 	ThemeColor {
 		id: highlightColorProperty
-		propPath: 'Kirigami.Theme.highlightColor'
+		propPath: 'theme.highlightColor'
 		mainPropKey: 'themeHighlightColor'
 	}
 
 	ThemeColor {
 		id: textColorProperty
-		propPath: 'Kirigami.Theme.textColor'
+		propPath: 'theme.textColor'
 		mainPropKey: 'themeTextColor'
 	}
 
@@ -223,36 +219,27 @@ PlasmoidItem {
 		Kirigami.ScrollablePage {
 			id: scrollView
 			anchors.fill: parent
-			// property int contentWidth: contentItem ? contentItem.width : width
-			// property int contentHeight: contentItem ? contentItem.height : 0 // Warning: Binding loop
-			// property int viewportWidth: viewport ? viewport.width : width
-			// property int viewportHeight: viewport ? viewport.height : height
-
 			ColumnLayout {
-				width: scrollView.viewportWidth
-				// width: parent.width
-				
+				width: scrollView.width
+				Layout.alignment: Qt.AlignHCenter
 				ColumnLayout {
 					spacing: 0
-
 					PlasmaExtras.Heading {
 						text: i18n("Accent Color")
 						level: 3
 						lineHeight: 1
 					}
-
 					PlasmaComponents.Label {
 						text: i18n("Panel, Widget, Window Titlebars & Frames")
 						opacity: 0.6
 					}
 				}
-
 				ConfigColor {
 					id: accentColorSelector
 					Layout.fillWidth: true
 					value: main.themeAccentColor
 					label: ""
-					// showAlphaChannel: false
+					showAlphaChannel: false
 					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
@@ -275,7 +262,7 @@ PlasmoidItem {
 					Layout.fillWidth: true
 					value: main.themeTextColor
 					label: ""
-					// showAlphaChannel: false
+					showAlphaChannel: false
 					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
@@ -298,7 +285,7 @@ PlasmoidItem {
 					Layout.fillWidth: true
 					value: main.themeHighlightColor
 					label: ""
-					// showAlphaChannel: false
+					showAlphaChannel: false
 					buttonOutlineColor: Kirigami.Theme.textColor
 					
 					onValueChanged: apply()
@@ -329,15 +316,16 @@ PlasmoidItem {
 				}
 				
 				RowLayout {
-					PlasmaComponents.ToolButton {
+					Layout.alignment: Qt.AlignHCenter
+					PlasmaComponents.Button {
 						text: i18n("Apply Colors")
-						// iconName: "dialog-ok-apply"
+						icon.name: "dialog-ok-apply"
 						onClicked: main.applyTitleBarColors()
 						// implicitWidth: minimumWidth
 					}
 					PlasmaComponents.Button {
 						text: i18n("Reset Colors")
-						// iconName: "edit-undo-symbolic"
+						icon.name: "edit-undo-symbolic"
 						onClicked: main.resetTitleBarColors()
 						// implicitWidth: minimumWidth
 					}
@@ -488,7 +476,7 @@ PlasmoidItem {
 
 				PlasmaComponents.Button {
 					text: i18n("Reset To Defaults")
-					// iconName: "edit-undo-symbolic"
+					icon.name: "edit-undo-symbolic"
 					onClicked: main.resetAllToDefaults()
 					// implicitWidth: minimumWidth
 					Layout.alignment: Qt.AlignHCenter
