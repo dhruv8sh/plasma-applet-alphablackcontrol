@@ -4,19 +4,23 @@
             {
                 "Email": "zrenfire@gmail.com",
                 "Name": "Chris Holland"
+            },
+            {
+                "Email": "dhruv8sh@proton.me",
+                "Name": "Dhruvesh Surolia"
             }
         ],
-        "Category": "",
+        "Category": "Plasma Theme",
         "Description": "",
         "EnabledByDefault": true,
         "Icon": "color-picker-black",
         "Id": "com.github.zren.alphablackcontrol",
         "Name": "AlphaBlack Control",
         "Version": "8",
-        "Website": "https://github.com/Zren/plasma-applet-alphablackcontrol"
+        "Website": "https://github.com/dhruv8sh/plasma-applet-alphablackcontrol"
     },
-    "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices",
     "KPackageStructure": "Plasma/Applet",
-    "X-Plasma-API-Minimum-Version": "6.0"
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

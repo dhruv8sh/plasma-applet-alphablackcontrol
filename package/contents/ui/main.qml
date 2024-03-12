@@ -15,9 +15,9 @@ PlasmoidItem {
 
 	property string targetDesktopTheme: 'breeze-alphablack'
 
-	property bool validDesktopTheme: Kirigami.Theme.themeName == targetDesktopTheme || Kirigami.Theme.themeName == 'breeze-dark'
+	property bool validDesktopTheme: Kirigami.Theme.themeName === targetDesktopTheme || Kirigami.Theme.themeName === 'breeze-dark'
 	property bool widgetsUnlocked: plasmoid.immutability === PlasmaCore.Types.Mutable
-	Plasmoid.status: validDesktopTheme && widgetsUnlocked ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
+	Plasmoid.status: /*(validDesktopTheme && widgetsUnlocked) ?*/ PlasmaCore.Types.ActiveStatus /*: PlasmaCore.Types.HiddenStatus*/
 
 	property string taskStyle: 'inside'
 	property color themeAccentColor: "#000000"
