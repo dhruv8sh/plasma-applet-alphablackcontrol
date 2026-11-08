@@ -5,6 +5,7 @@ import org.kde.plasma.plasmoid
 import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.kwindowsystem
 
 MouseArea {
 	id: task
@@ -33,7 +34,7 @@ MouseArea {
 
 				active: task.containsMouse
 				enabled: true
-				source: "xorg"
+				source: KWindowSystem.isPlatformWayland ? "wayland" : "xorg" 
 			}
 			PlasmaComponents.Label {
 				id: label
